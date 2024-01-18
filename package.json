@@ -1,0 +1,32 @@
+{
+  "name": "template",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.4.1",
+    "@astrojs/react": "^3.0.9",
+    "@astrojs/tailwind": "^5.1.0",
+    "@nextui-org/react": "^2.2.9",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "@types/yup": "^0.32.0",
+    "astro": "^4.1.2",
+    "formik": "^2.4.5",
+    "framer-motion": "^10.18.0",
+    "million": "^2.6.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3",
+    "yup": "^1.3.3"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
