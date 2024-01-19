@@ -1,7 +1,18 @@
 ---
+import SeedForm from "@/components/seed-form";
+import TokenModules from "@/components/token-modules";
+import Logo from "@/components/logo.astro";
 import MainLayout from "@/layouts/main-layout.astro";
+import BarControl from "@/components/bar-control";
 ---
 
 <MainLayout>
-  <h1>Astro + NextUI - Template</h1>
+  <main class="flex flex-col gap-8 max-w-6xl mx-4 6xl:mx-auto my-4">
+    <Logo />
+    <div class="flex flex-col gap-2">
+      <SeedForm client:load />
+      <BarControl client:load />
+    </div>
+    <TokenModules client:load />
+  </main>
 </MainLayout>

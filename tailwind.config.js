@@ -7,7 +7,11 @@ export default {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        "6xl": "1152px",
+      },
+    },
   },
   plugins: [],
   darkMode: "class",
