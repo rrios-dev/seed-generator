@@ -1,12 +1,12 @@
-import { useStore } from "@nanostores/react";
-import optionsAtom from "../atoms/options";
+import {useStore} from '@nanostores/react';
+
+import optionsAtom from '../atoms/options';
 
 const useGeneratorOptions = () => useStore(optionsAtom);
 
-export const useGeneratorOptionsHandlers = () => {
-  return {
-    set: optionsAtom.set,
-  };
-};
+export const useGeneratorOptionsHandlers = () => ({
+	set: optionsAtom.set,
+	get: optionsAtom.get,
+});
 
 export default useGeneratorOptions;

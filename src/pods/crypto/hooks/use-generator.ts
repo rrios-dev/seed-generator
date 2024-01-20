@@ -1,33 +1,24 @@
-import SHA3 from "crypto-js/sha3";
-import useSWRImmutable from "swr/immutable";
+import type {BareFetcher} from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
-import { formatPassword } from "../crypto";
-import type { GeneratorOptions } from "../interfaces";
+import type {GeneratorOptions} from '../interfaces';
+import parseModule from '../utils/parse-module';
 
-const fetcher = ({
-  seed,
-  tokenLength,
-  tokensByModule,
-}: Omit<GeneratorOptions, "modulesCount">) => {
+export const fetcher: BareFetcher<string[]> = async (
+	props: Omit<GeneratorOptions, 'modulesCount'>,
+) => parseModule(props);
 
-  return Array.from({ length: tokensByModule }).map((_, idx) => {
-    const password = SHA3(`${seed}${idx}`).toString();
-    const formatedPassword = formatPassword(password, idx.toString());
-    return formatedPassword.slice(0, tokenLength);
-  });
-};
+const useGenerator = (props: Omit<GeneratorOptions, 'modulesCount'>) => {
+	const {data, error, isValidating} = useSWRImmutable<string[], Error>(
+		props.seed ? props : null,
+		fetcher,
+	);
 
-const useGenerator = (props: Omit<GeneratorOptions, "modulesCount">) => {
-  const { data, error, isValidating } = useSWRImmutable(
-    props.seed ? props : null,
-    fetcher
-  );
-
-  return {
-    data,
-    error,
-    isLoading: isValidating && Boolean(data),
-  };
+	return {
+		data,
+		error,
+		isLoading: isValidating && Boolean(data),
+	};
 };
 
 export default useGenerator;

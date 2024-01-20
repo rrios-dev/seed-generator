@@ -1,29 +1,30 @@
-import { useField, useFormikContext } from "formik";
-import { type ComponentProps, type ComponentType } from "react";
+import {useField, useFormikContext} from 'formik';
+import {type ComponentProps, type ComponentType} from 'react';
 
 type FormikControlProps<T extends ComponentType<any>> = ComponentProps<T> & {
-  name: string;
-  Input: T;
+	name: string;
+	Input: T;
 };
 
+// TODO: Enhance typings
 const FormikControl = <T extends ComponentType<any>>({
-  Input,
-  name,
-  ...rest
+	Input,
+	name,
+	...rest
 }: FormikControlProps<T>) => {
-  const { submitCount } = useFormikContext();
-  const [field, { error }] = useField(name);
-  const displayError = submitCount > 0 && Boolean(error);
+	const {submitCount} = useFormikContext();
+	const [field, {error}] = useField(name as string);
+	const displayError = submitCount > 0 && Boolean(error);
 
-  return (
-    <Input
-      {...rest}
-      {...field}
-      name={name}
-      errorMessage={displayError && error}
-      isInvalid={displayError}
-    />
-  );
+	return (
+		<Input
+			{...rest}
+			{...field}
+			name={name as string}
+			errorMessage={displayError && error}
+			isInvalid={displayError}
+		/>
+	);
 };
 
 export default FormikControl;
