@@ -1,4 +1,3 @@
-import {isNotNil} from 'ramda';
 import {Button} from '@nextui-org/react';
 import {
 	ClipboardIcon,
@@ -6,17 +5,14 @@ import {
 	EyeClosedIcon,
 	EyeOpenIcon,
 } from '@radix-ui/react-icons';
-import {useMemo} from 'react';
-import useSWR, {useSWRConfig} from 'swr';
 
-import useGeneratorOptions from '@/pods/crypto/hooks/use-generator-options';
 import useControls, {
 	useControlsHandlers,
 } from '@/pods/controls/hooks/use-controls';
+import useGeneratorOptions from '@/pods/crypto/hooks/use-generator-options';
 import useGenerators from '@/pods/crypto/hooks/use-generators';
 
 const BarControl = () => {
-	const config = useSWRConfig();
 	const {showTokens} = useControls();
 	const controlsHandlers = useControlsHandlers();
 	const options = useGeneratorOptions();

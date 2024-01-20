@@ -1,42 +1,74 @@
-const SPECIAL_CHARACTERS = ['!', '$', '%', '&', '?', '+', '-', '*', '^', '='];
+import cryptoJS from 'crypto-js';
 
-const uppercaseWhenIdxIsEven = (word: string, idx: number) =>
-	idx % 2 === 0 ? word.toUpperCase() : word;
+import type {GeneratorOptions} from './interfaces';
 
-let specialCharactersCount = 0;
+export const makeToken = ({
+	seed,
+	tokenLength,
+}: Pick<GeneratorOptions, 'seed' | 'tokenLength'>): string => {
+	const charset
+    = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
+	const seedBytes = cryptoJS
+		.SHA256(`${seed}-${tokenLength}`)
+		.toString(cryptoJS.enc.Hex);
 
-const replaceWithSpecialCharacterWhenIdxIsEven = (
-	digit: string,
-	idx: number,
-) => {
-	if (idx % 2 === 0) {
-		return digit;
+	const permutedCharset = fisherYatesPermute(charset, seedBytes);
+
+	let currentIndex = 0;
+	let securePassword = '';
+
+	while (securePassword.length < tokenLength) {
+		securePassword += permutedCharset[currentIndex % permutedCharset.length];
+		currentIndex++;
 	}
 
-	const output = SPECIAL_CHARACTERS[specialCharactersCount];
-	specialCharactersCount
-    = SPECIAL_CHARACTERS.length - 1 === specialCharactersCount
-    	? 0
-    	: specialCharactersCount + 1;
-	return output;
+	return securePassword;
 };
 
-export const formatPassword = (
-	password: string,
-	specialCharaterStart: string,
-): string => {
-	specialCharactersCount = Number(
-		specialCharaterStart[specialCharaterStart.length - 1],
+const fisherYatesPermute = (array: string, seedBytes: string): string[] => {
+	const {length} = array;
+	const permutedArray = array.split('');
+
+	for (let i = length - 1; i > 0; i--) {
+		const j = parseInt(seedBytes[i % seedBytes.length], 16) % (i + 1);
+		[permutedArray[i], permutedArray[j]] = [permutedArray[j], permutedArray[i]];
+	}
+
+	return permutedArray;
+};
+
+export const makeModule = ({
+	seed,
+	tokensByModule,
+	tokenLength,
+}: Omit<GeneratorOptions, 'modulesCount'>): string[] => {
+	const finalSeed = cryptoJS.SHA256(seed).toString(cryptoJS.enc.Hex);
+
+	return finalSeed && tokensByModule && tokenLength
+		? Array.from({length: tokensByModule}, (_, i) =>
+			makeToken({
+				seed: `${finalSeed}-${tokensByModule}-${i}`,
+				tokenLength,
+			}),
+		)
+		: [];
+};
+
+export const makeModules = ({
+	modulesCount,
+	seed,
+	tokenLength,
+	tokensByModule,
+}: GeneratorOptions): string[][] => {
+	if (!seed || !tokensByModule || !tokenLength || !modulesCount) {
+		return [];
+	}
+
+	return Array.from({length: modulesCount}, (_, idx) =>
+		makeModule({
+			seed: `${seed}-${modulesCount}-${idx}`,
+			tokenLength,
+			tokensByModule,
+		}),
 	);
-
-	return Array.from({length: password.length}).reduce<string>((acc, _, idx) => {
-		const character = password[idx];
-		const isWord = /[a-z]/.test(character);
-
-		return `${acc}${
-			isWord
-				? uppercaseWhenIdxIsEven(character, idx)
-				: replaceWithSpecialCharacterWhenIdxIsEven(character, idx)
-		}`;
-	}, '');
 };

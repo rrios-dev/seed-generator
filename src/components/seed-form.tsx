@@ -3,13 +3,13 @@ import {EyeClosedIcon, EyeOpenIcon} from '@radix-ui/react-icons';
 import {Form, Formik, useFormikContext} from 'formik';
 import {useEffect, useRef, useState} from 'react';
 
-import useGeneratorOptions, {
+import yup from '@/pods/common/yup';
+import {initialOptions} from '@/pods/crypto/atoms/options';
+import {
 	useGeneratorOptionsHandlers,
 } from '@/pods/crypto/hooks/use-generator-options';
-import {INITIAL_OPTIONS} from '@/pods/crypto/atoms/options';
-import yup from '@/pods/common/yup';
-import FormikControl from './formik-control';
 import type {GeneratorOptions} from '@/pods/crypto/interfaces';
+import FormikControl from './formik-control';
 
 const validationSchema = yup.object().shape({
 	tokensByModule: yup.number().required().min(1),
@@ -41,7 +41,7 @@ const Menu = () => {
 	const options = useGeneratorOptionsHandlers();
 	return (
 		<Formik
-			initialValues={INITIAL_OPTIONS}
+			initialValues={initialOptions}
 			validationSchema={validationSchema}
 			onSubmit={options.set}
 		>

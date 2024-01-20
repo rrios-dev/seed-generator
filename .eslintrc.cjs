@@ -2,6 +2,7 @@ module.exports = {
 	env: {
 		browser: true,
 		es2021: true,
+		'jest/globals': true,
 	},
 	extends: ['xo', 'plugin:react/recommended'],
 	overrides: [
@@ -23,11 +24,11 @@ module.exports = {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 	},
-	plugins: ['react', 'import'],
+	plugins: ['react', 'import', 'jest'],
 	rules: {
 		'react/react-in-jsx-scope': 'off',
 		'@typescript-eslint/triple-slash-reference': 'off',
-		'@typescript-eslint/naming-convention': 'off',
+		'no-mixed-spaces-and-tabs': 'off',
 		'import/order': [
 			'error',
 			{
@@ -35,5 +36,11 @@ module.exports = {
 				'newlines-between': 'always',
 			},
 		],
+		'jest/no-disabled-tests': 'warn',
+		'jest/no-focused-tests': 'error',
+		'jest/no-identical-title': 'error',
+		'jest/prefer-to-have-length': 'warn',
+		'jest/valid-expect': 'error',
+		'new-cap': 'off',
 	},
 };
