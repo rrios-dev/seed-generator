@@ -1,47 +1,66 @@
-# Astro Starter Kit: Minimal
+# Seeds: A Web App for Custom Hash Generation
 
-```sh
-npm create astro@latest -- --template minimal
+[URL](https://seeds.rrios.dev/)
+
+## Overview
+
+Seeds is an advanced hash generation web application developed with the robust Astro framework using TypeScript. This state-of-the-art tool offers custom hash generation based on a seed phrase with a plethora of customizable parameters including token length, the number of hash groups (modules), and the number of hashes per module. Designed for efficiency and ease of use, Seeds caters to a variety of use cases from security to software development.
+
+## Features
+
+- **Custom Hash Generation**: Create hashes that meet your specific requirements.
+- **Adjustable Token Length**: Tailor the length of your tokens for your security needs.
+- **Modular Hash Groups**: Organize your hashes in a structured manner with the ability to specify the number of modules.
+- **Variable Hashes Per Module**: Decide on the number of hashes generated within each module.
+- **Sleek User Interface**: A modern, intuitive UI that simplifies the complexity of hash generation.
+
+## Getting Started
+
+Clone the repository to your local machine:
+
+```bash
+git clone https://github.com/rrios-dev/seed-generator
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+Navigate to the project directory:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+cd seeds
 ```
+npm install
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+```bash
+npm install
+```
+To start the development server:
+```bash
+npm run dev
+```
+For building the project for production:
+```bash
+npm run build
+```
+To preview the production build:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+npm run preview
+```
+## Usage
+1. Enter your seed phrase.
+2. Adjust the token length, module count, and hashes per module to your preference.
+3. Generate hashes with a single click.
+4. Easily copy and manage your generated hashes.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Scripts
+- `npm run dev` - Start the development server with hot reload.
+- `npm run start` - Alias to npm run dev.
+- `npm run build` - Check and build the project for production.
+- `npm run preview` - Preview the production build.
+- `npm run astro` - Directly interact with the Astro CLI.
+- `npm run test` - Run tests using Vitest.
 
-## 🧞 Commands
+## Contributing
+Contributions to HashGen are welcome! Please read our contributing guidelines before submitting pull requests.
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## License
+HashGen is open-source software licensed under the MIT license.
