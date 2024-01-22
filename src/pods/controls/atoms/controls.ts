@@ -1,7 +1,7 @@
 import {atom} from 'nanostores';
 
 const controlsAtom = atom({
-	showTokens: false,
+    showTokens: false,
 });
 
 export default controlsAtom;
