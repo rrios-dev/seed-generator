@@ -1,5 +1,7 @@
 # Seeds: A Web App for Custom Hash Generation
 
+![Seeds](https://github.com/rrios-dev/seed-generator/blob/main/seeds.png?raw=true)
+
 [URL](https://seeds.rrios.dev/)
 
 ## Overview
