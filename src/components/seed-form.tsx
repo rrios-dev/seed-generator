@@ -41,7 +41,7 @@ const SeedSubmit = () => {
             clearTimeout(timer.current);
             timer.current = setTimeout(() => {
                 handleSubmit();
-            }, 1000);
+            }, 100);
         } else {
             mounted.current = true;
         }
